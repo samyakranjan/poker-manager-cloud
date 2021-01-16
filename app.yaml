@@ -1,0 +1,20 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /welcome
+  static_files: www/welcome.html
+  upload: www/welcome.html
+
+#Handle default/error page
+- url: /error
+  static_files: www/hello.html
+  upload: www/hello.html
+
+#Might need to bifurcate in the future so not to create a longer than needed regex handler
+- url: /player/(.*)|^/group/(.*)|^/login/(.*)|^/session/(.*)|^/transaction/(.*)
+  script: main.app
+
+- url: /(.*)
+  script: main.app
